@@ -1,0 +1,17 @@
+
+<center>
+<!-- <div style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> -->
+<form method="post">
+    {% csrf_token %}
+    {{form.media}}
+        {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+</div>
+<script>
+    CKEDITOR.replace( '{{ form.content.name }}', {
+      customConfig: '{{ CKEDITOR_BASEPATH }}ckeditor_config.js',
+    } );
+    </script>
+    
+</center>

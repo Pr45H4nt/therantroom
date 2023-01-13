@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  The Rant Room
+{% endblock title %}
+      
+
+
+    {% block content %}
+      
+    
+    
+    <div class="main">
+      <hr>
+      <h1 class="center">The Rant Room</h1>
+      <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: larger;">
+        Welcome to our platform, where you will discover a vast array of thought-provoking philosophical and psychological topics to dive into.
+         Our platform is <b> unapologetically real</b>, so expect to encounter a wide range of opinions, including <b> potentially offensive language, controversial ideas, and more.</b>
+          We encourage open dialogue and welcome constructive disagreement, so feel free to share your own perspectives and engage in lively debates in the comments section.
+           So, come join us on this intellectual journey, and let's fucking explore the depths of human thought together!</p>
+    </div>
+    <hr>
+    <center>
+      <h3><strong style="text-decoration: underline; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: larger;">Articles</strong></h3>
+    </center>
+    
+    
+    <!-- cards -->
+    <div class="card-container">
+      
+      
+      {% for article in articles  %}
+      
+<a href="{% url 'article' slug=article.Slug %}" style="text-decoration: none;">
+<div class="card">
+  <img src="{{article.poster}}" alt="Image">
+  <div class="card-content">
+    <h2>{{article.Title | upper}}</h2>
+    <p>{{article.summary}}</p>
+    <a href="{% url 'article' slug=article.Slug %}" class="read-more">Read More</a>
+  </div>
+</div>
+</a>
+{% endfor %}
+
+
+</div>
+
+
+
+
+
+
+<!-- <br><br>
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">&raquo;</a>
+      </div>
+       -->
+      {% endblock content %}

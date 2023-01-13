@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    
+    <head>
+      <title>FeedBack</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon.png' %}">
+    <style>
+      /* Add CSS styles for the background image */
+      body {
+        background-image: url("{% static 'bg.png' %}");
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* make the background image the size of the window */
+      }
+      
+      /* Add CSS styles for the text */
+
+
+      .home-button {
+    background-color: #343a40; /* dark theme */
+    color: #fff; /* white text */
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 40px;
+    transition: all 0.3s ease-in-out; /* add transition for hover effect */
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+      
+      /* Add hover effect for the button */
+      .home-button:hover {
+        background-color: #fff; /* change background color on hover */
+        color: #343a40; /* change text color on hover */
+        box-shadow: 0px 0px 10px #343a40; /* add a shadow on hover */
+      }
+
+      body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+form {
+  padding-right: 20px;
+  color: white;
+}
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #f1f1f1;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <!-- <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br>
+    
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea><br> -->
+    
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    
+
+    <a href="{% url 'home' %}">
+    <button class="home-button" >Home</button>
+</a>  
+</body>
+</html>

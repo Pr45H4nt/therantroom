@@ -1,0 +1,38 @@
+<html>
+  <head>
+    {% load static %}
+
+    <title>
+    {% block title %}
+      
+    {% endblock title %}
+      </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon.png' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+  </head>
+  <body>
+
+    <div class="nav"><br>
+    <img src="{% static 'logo.png' %}" alt="Logo"><br><br><br>
+      <a href="{% url 'home' %}">Home</a>
+      <a href=" {% url 'about' %} ">About</a>
+      <a href="{% url 'blowmymind' %}">Blow my Mind</a>
+      
+      {% if user.is_authenticated %}
+      <a href="{% url 'write_article' %}">Post</a>
+      {% endif %}
+      <a href="{% url 'donate' %}">Help me buy a coffee!</a>
+      <a href="{% url 'feedback' %}">FeedBack</a>
+        
+    </div>
+    <form class="search-form" method="get" action="{%url 'home'%}">
+      <input type="text" placeholder="Seek enlightenment..." name = 'q'>
+      <button type="submit"><i class="fas fa-search"></i></button>
+      <br><button type="submit">
+        Search
+      </button>
+    </form>
+
+    {% block content %} {% endblock content %}
+  </body>
+</html>

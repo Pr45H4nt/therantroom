@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+  <head>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icon.png' %}">
+<title>About</title>
+    <style>
+      /* Add CSS styles for the background image */
+      body {
+        background-image: url("{% static 'bg.png' %}");
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* make the background image the size of the window */
+      }
+      
+      /* Add CSS styles for the text */
+      .text {
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+      }
+
+      .home-button {
+    background-color: #343a40; /* dark theme */
+    color: #fff; /* white text */
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 40px;
+    transition: all 0.3s ease-in-out; /* add transition for hover effect */
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+      
+      /* Add hover effect for the button */
+      .home-button:hover {
+        background-color: #fff; /* change background color on hover */
+        color: #343a40; /* change text color on hover */
+        box-shadow: 0px 0px 10px #343a40; /* add a shadow on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text">
+      <p>About Us</p>
+    </div>
+    <a href="{% url 'home' %}">
+    <button class="home-button" >Home</button>
+</a>  
+</body>
+</html>

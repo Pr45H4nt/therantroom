@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+<div class="card-container">
+      
+      
+      {% block content %}
+        
+      <center>
+        <h3><strong style="text-decoration: underline; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: larger;">{% if no == 1 %} 1 Article {% else %} {{no}} Articles</strong></h3>
+      </center>
+
+      {% endif %}
+      {% for article in articles  %}
+    
+<a href="{% url 'article' slug=article.Slug %}" style="text-decoration: none;">
+<div class="card">
+<img src="https://occ-0-444-1348.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABZFNYNnB66QlfiOKMmQgozv56hwY4Bs6Ds1q7Fcy11zGqN9XlRogegQghh0kcWzfxlNd5nbQw4uFiUATMHW89wJNyoBTaCyVH1KDAAqw2iJO4E59Y1hhwMuF.jpg?r=54b" alt="Image">
+<div class="card-content">
+  <h2>{{article.Title | upper}}</h2>
+  <p>{{article.Content | safe}}</p>
+  <a href="{% url 'article' slug=article.Slug %}" class="read-more">Read More</a>
+</div>
+</div>
+</a>
+{% endfor %}
+
+
+</div>
+
+{% endblock content %}

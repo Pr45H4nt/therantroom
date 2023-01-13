@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{article.Title}}
+{% endblock title %}
+  
+
+{% block content %}
+<style>
+    .main {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.article {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.article-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.article-content {
+  font-size: 1.25em;
+  line-height: 1.5;
+  text-align: left;
+  /* margin-right: 00px; */
+}
+.comment-box {
+  margin-left: 200px;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px #ccc;
+}
+
+.comment-box input, .comment-box textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.comment-box textarea {
+  resize: none;
+}
+
+.comment-box button[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.comment-box button[type=submit]:hover {
+  background-color: #45a049;
+}
+#show-comment-form {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom:10px;
+}
+
+#show-comment-form:hover {
+    background-color: #3e8e41;
+}
+/* Add a margin to the left of the comments */
+.comments {
+    margin-left: 200px;
+}
+
+/* Style the comment container */
+.comment-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Style the comment body */
+.comment-body {
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+
+</style>
+  <div class="main">
+    <div class="article">
+      <h1 class="center">{{article.Title}}</h1>
+      <div class="article-content">
+        {{ article.Content | safe }} 
+        
+
+        {{article.Published_date}}
+        
+      </div>
+    </div>
+  </div>
+  <hr><br>
+  <form action="" method="post" class="comment-box">
+    {% csrf_token %}
+    <button type="button" id="show-comment-form">Add Comment</button>
+    <div id="comment-form" style="display: none;">
+        <br>{{ commentform.Body }}
+        <button type="submit">Post</button>
+    </div>
+</form>
+
+<script>
+  document.getElementById("show-comment-form").onclick = function() {
+      var commentForm = document.getElementById("comment-form");
+      if (commentForm.style.display === "none") {
+          commentForm.style.display = "block";
+      } else {
+          commentForm.style.display = "none";
+      }
+  }
+</script>
+
+  
+
+
+
+
+
+<center><b style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-decoration: underline; font-size: 150%; ">Comments</b></center>
+<center><i>(Be civil, you are not a monkey)</i></center><br>
+{% if article.comments.all %}
+{% for comment in article.comments.all %}
+<div class="comments">
+      <div class="comment-container">
+          <div class="comment-body">
+              <strong>{{comment.Body}}</strong>
+          </div>
+      </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% endif %}
+    
+    
+    <br>
+    <div class="card-container">
+          
+          
+      {% for sug_Article in suggestions %}
+      
+    <a href="{% url 'article' slug=sug_Article.Slug %}" style="text-decoration: none;">
+    <div class="card">
+    <img src="{{sug_Article.poster}}" alt="Image">
+    <div class="card-content">
+    <h2>{{sug_Article.Title | upper}}</h2>
+    <p>{{sug_Article.summary}}</p>
+    <a href="{% url 'article' slug=sug_Article.Slug %}" class="read-more">Read More</a>
+    </div>
+    </div>
+    </a>
+    {% endfor %}
+    <br> <br>
+{% endblock content %}
