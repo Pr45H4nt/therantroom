@@ -1,9 +1,11 @@
 from django.shortcuts import render , redirect
 from django.db.models import Q
 from taggit.models import TaggedItem
-from .models import Article
+from .models import Article , Subject
 from .forms import ArticleForm , CommentForm , Feedbackform
 from django.contrib.auth.decorators import login_required
+
+
 
 @login_required(login_url='home')
 def create_article(request):
@@ -23,13 +25,14 @@ def homeview(request):
         articles = Article.objects.filter(
             Q(Title__icontains=query) | 
             Q(Content__icontains=query)
-            )
+            ) 
         return render(request, 'search_results.html', {'articles': articles, 'no': len(articles)})
 
     else:
         articles = Article.objects.all()
         context = {
-            'articles' : articles
+            'articles' : articles ,
+            'categories' : Subject.objects.all()
         }
         return render(request, 'homepage.html', context)
 
@@ -79,3 +82,7 @@ def blowmymind(request):
     from random import choice
     article = choice(All)
     return redirect('article',slug=article.Slug)
+
+
+
+

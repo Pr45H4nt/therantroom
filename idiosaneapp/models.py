@@ -3,12 +3,19 @@ from ckeditor.fields import RichTextField
 from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
 
+
+class Subject(models.Model):
+    Name = models.CharField(max_length=100, unique=True)
+    def __str__(self) -> str:
+        return str(self.Name)
+
 # Create your models here.
 class Article(models.Model):
     poster = models.CharField(max_length=10000)
     Title = models.CharField(max_length=10000)
     summary = models.CharField(max_length=10000, null = True, blank= True)
     Content = RichTextField(blank=True , null= True )
+    Category = models.ManyToManyField(Subject , related_name= 'posts', blank=True)
     Slug = AutoSlugField(populate_from = 'Title', null = True , unique = True)
     Published_date = models.DateField(auto_now=True)
     Tags = TaggableManager()
@@ -32,3 +39,4 @@ class Feedback(models.Model):
     
     def __str__(self):
         return str(self.Message)
+

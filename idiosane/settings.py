@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'idiosaneapp',
-    'ckeditor', 'taggit'
+    'ckeditor', 'taggit', 'rest_framework', 'api'
 ]
 
 MIDDLEWARE = [
