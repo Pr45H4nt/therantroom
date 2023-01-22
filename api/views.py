@@ -11,7 +11,6 @@ class CommentList(generics.ListCreateAPIView):
     def get_queryset(self):
         return Article.objects.get(pk = self.kwargs['pk']).comments.all()
     serializer_class = Commentserializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(post= Article.objects.get(pk=self.kwargs['pk']))
@@ -19,3 +18,4 @@ class CommentList(generics.ListCreateAPIView):
 class Categorylist(generics.ListCreateAPIView):
     queryset = Subject.objects.all()
     serializer_class = Categoryserializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
