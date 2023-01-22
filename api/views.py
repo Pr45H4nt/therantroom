@@ -19,3 +19,8 @@ class Categorylist(generics.ListCreateAPIView):
     queryset = Subject.objects.all()
     serializer_class = Categoryserializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class Categoryposts(generics.ListAPIView):
+    def get_queryset(self):
+        return Subject.objects.get(id = self.kwargs['pk']).posts.all()
+    serializer_class = Articleserializer
